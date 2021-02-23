@@ -5,6 +5,10 @@ using namespace std;
 Encode::Encode()
 {
     EncodeMap.insert(pair<string,EnValues*>("i",new MyInt));
+    EncodeMap.insert(pair<string,EnValues*>("f",new MyFloat));
+    EncodeMap.insert(pair<string,EnValues*>("d",new MyDouble));
+    EncodeMap.insert(pair<string,EnValues*>("c",new MyChar));
+    EncodeMap.insert(pair<string,EnValues*>("PKc",new MyString));
 }
 
 Encode::~Encode()
@@ -17,7 +21,6 @@ Encode::~Encode()
 
 string Encode::encoding(string fuggvenyNev,vector<any> parameter){
     EnValues tmp;
-
     string send=tmp.IntToString(fuggvenyNev.size());
     send+=fuggvenyNev;
     string parm="";
@@ -33,9 +36,7 @@ string Encode::encoding(string fuggvenyNev,vector<any> parameter){
             throw invalid_argument("nincs ilyen parameter tipus implementalva");
         }
     }
-    cout<<"SendSize: "<<send.size()<<endl;
     string sendFin=tmp.IntToString(send.size());
     sendFin+=send;
-    cout<<sendFin<<endl;
     return sendFin;
 }

@@ -6,14 +6,11 @@
 
 class EnValues
 {
-private:
 public:
     //EnValues();
     virtual ~EnValues(){
         std::cout<<"";
     }
-    //visszateriti a valtozo hosszat, kulon alosztaly kell a mukodesehez
-    int virtual getSize(std::any value);
     //visszateriti a valtozo tipusat, megy direkt
     std::string getType(std::any value);
     //visszateriti a valtozot strinnge alakitva,
@@ -27,15 +24,50 @@ public:
 
 class MyInt:public EnValues
 {
-private:
-    /* data */
 public:
-    ~MyInt(){
-        std::cout<<"";
-    }
-    int getSize(std::any value);
+    ~MyInt(){}
     std::string getString(std::any value);
 };
+
+class MyFloat:public EnValues
+{
+public:
+    ~MyFloat(){}
+    std::string getString(std::any value);
+};
+
+class MyDouble:public EnValues
+{
+public:
+    ~MyDouble(){}
+    std::string getString(std::any value);
+};
+
+class MyChar:public EnValues
+{
+public:
+    ~MyChar(){}
+    std::string getString(std::any value);
+};
+
+class MyString:public EnValues
+{
+public:
+    ~MyString(){}
+    std::string getString(std::any value);
+};
+
+class MyBool:public EnValues
+{
+public:
+    ~MyBool(){}
+    std::string getString(std::any value);
+};
+
+
+
+
+
 
 
 
