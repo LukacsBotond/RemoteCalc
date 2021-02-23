@@ -13,19 +13,21 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include "../common/DeValues.h"
 
 
-
-class Szerver{
+class Server{
     public:
-        Szerver();
-        ~Szerver();
+        Server();
+        ~Server();
         std::string Recive();
-
+        bool resCheck(int res);
     private:
-        sockaddr_in client;
-        socklen_t clientSize = sizeof(client);
+        int client;
         int listening;
+        int ReciveSize();
+        DeValues dekoder;
+
 };
 
 

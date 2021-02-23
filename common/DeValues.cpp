@@ -2,6 +2,10 @@
 
 using namespace std;
 
+DeValues::DeValues(){}
+
+DeValues::~DeValues(){}
+
 int DeValues::StringToInt(string input){
     return stoi(input);
 }

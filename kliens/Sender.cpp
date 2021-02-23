@@ -48,7 +48,7 @@ bool Sender::resCheck(int res)
 {
     if (res < 0)
     {
-        cout << "RECV error, exit thread\n";
+        cout << "RECV error\n";
         return false;
     }
     if (res == 0)

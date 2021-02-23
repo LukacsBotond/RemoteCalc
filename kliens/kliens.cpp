@@ -3,6 +3,7 @@
 #include <vector>
 #include "../common/EnValues.h"
 #include "Encode.h"
+#include "Sender.h"
 
 using namespace std;
 
@@ -29,9 +30,10 @@ int main(){
         cout<<(int)test[i]<<" ";
     }*/
     cout<<"";
+    Sender* send = new Sender;
     Encode* gg = new Encode;
-
     gg->encoding("add",barmi);
+    send->Sending(gg->encoding("add",barmi));
 
 
     return 0;

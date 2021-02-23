@@ -33,8 +33,9 @@ string Encode::encoding(string fuggvenyNev,vector<any> parameter){
             throw invalid_argument("nincs ilyen parameter tipus implementalva");
         }
     }
+    cout<<"SendSize: "<<send.size()<<endl;
     string sendFin=tmp.IntToString(send.size());
     sendFin+=send;
-    cout<<send<<endl;
-    return send;
+    cout<<sendFin<<endl;
+    return sendFin;
 }

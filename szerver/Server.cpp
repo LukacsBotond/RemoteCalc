@@ -1,8 +1,10 @@
 #include "Server.h"
+#include "../common/DeValues.h"
 
 using namespace std;
 
-Szerver::Szerver(){
+Server::Server()
+{
     // Create a socket
     listening = socket(AF_INET, SOCK_STREAM, 0);
     if (listening == -1)
@@ -34,15 +36,87 @@ Szerver::Szerver(){
     }
     // Tell Winsock the socket is for listening
     listen(listening, SOMAXCONN);
+    sockaddr_in clientsock;
+    socklen_t clientSize = sizeof(clientsock);
+    client = accept(listening, (sockaddr *)&client, &clientSize);
 }
 
-Szerver::~Szerver(){
+Server::~Server()
+{
     close(this->listening);
+    close(this->client);
 }
 
-string Szerver::Recive(){
+string Server::Recive()
+{
+    int hossz = ReciveSize();
+    vector<char> buf(hossz);
+    int res = recv(this->client, buf.data(), hossz, 0);
+    if (!resCheck(res))
+    {
+        cout << "EXIT RES\n";
+        exit(1);
+    }
+    while (res < hossz)
+    {
+        vector<char> bufextra(hossz);
+        int extra = recv(client, bufextra.data(), hossz - res, 0);
+        if (!resCheck(res))
+        {
+            cout << "EXIT RES\n";
+            exit(1);
+        }
+        for (int i = 0; i < extra; i++)
+            buf.at(i + res) = bufextra.at(i);
+        res += extra;
+    }
+    string csomag(buf.begin(), buf.end());
+    cout << csomag << endl;
+    return csomag;
+}
+
+int Server::ReciveSize()
+{
+    vector<char> buf(2);
     int hossz;
+    int res = recv(this->client, buf.data(), 2, 0);
+    if (!resCheck(res))
+    {
+        cout << "EXIT RES\n";
+        exit(1);
+    }
+    while (res < 2)
+    {
+        vector<char> bufextra(2);
+        int extra = recv(client, bufextra.data(), 2 - res, 0);
+        if (!resCheck(res))
+        {
+            cout << "EXIT RES\n";
+            exit(1);
+        }
+        for (int i = 0; i < extra; i++)
+            buf.at(i + res) = bufextra.at(i);
+        res += extra;
+    }
+    string csomag(buf.begin(), buf.end());
 
+    hossz = dekoder.Decode255(csomag);
+    cout << "hossz: " << hossz << endl;
 
+    return hossz;
+}
 
+bool Server::resCheck(int res)
+{
+    if (res < 0)
+    {
+        cout << "RECV error\n";
+        return false;
+    }
+    if (res == 0)
+    {
+        cout << "kilepett\n";
+        return false;
+    }
+    return true;
 }
