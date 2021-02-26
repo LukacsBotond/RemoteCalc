@@ -4,6 +4,32 @@
 #include <any>
 #include <iostream>
 
+struct MyIntpS{
+    int size{};
+    int *ertek{};
+};
+struct MyFloatpS{
+    int size;
+    float *ertek;
+};
+struct MyDoublepS{
+    int size;
+    double *ertek;
+};
+
+struct MyCharpS{
+    int size;
+    char *ertek;
+};
+struct MyStringpS{
+    int size;
+    std::string *ertek;
+};
+struct MyBoolpS{
+    int size;
+    bool *ertek;
+};
+
 class EnValues
 {
 public:
@@ -64,6 +90,44 @@ public:
     std::string getString(std::any value);
 };
 
+class MyIntP:public EnValues
+{
+public:
+    ~MyIntP(){}
+    std::string getString(std::any value);
+};
+
+class MyFloatP:public EnValues
+{
+public:
+    ~MyFloatP(){}
+    std::string getString(std::any value);
+};
+
+class MyDoubleP:public EnValues
+{
+public:
+    ~MyDoubleP(){}
+    std::string getString(std::any value);
+};
+class MyCharP:public EnValues
+{
+public:
+    ~MyCharP(){}
+    std::string getString(std::any value);
+};
+class MyStringP:public EnValues
+{
+public:
+    ~MyStringP(){}
+    std::string getString(std::any value);
+};
+class MyBoolP:public EnValues
+{
+public:
+    ~MyBoolP(){}
+    std::string getString(std::any value);
+};
 
 
 

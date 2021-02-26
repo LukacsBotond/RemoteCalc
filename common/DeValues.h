@@ -10,6 +10,7 @@ private:
 public:
     DeValues();
     ~DeValues();
+    
     int StringToInt(std::string input);
     unsigned int Decode255(std::string code);
     

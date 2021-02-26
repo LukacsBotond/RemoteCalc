@@ -19,8 +19,10 @@
 class Server{
     public:
         Server();
+        Server(int kliens);
         ~Server();
         std::string Recive();
+        bool Sending(std::string message);
         bool resCheck(int res);
     private:
         int client;

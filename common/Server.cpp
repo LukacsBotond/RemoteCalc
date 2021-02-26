@@ -34,11 +34,36 @@ Server::Server()
         cout << "bind failed\n";
         exit(-1);
     }
+    cout<<"the server is wating for the klient"<<endl;
     // Tell Winsock the socket is for listening
     listen(listening, SOMAXCONN);
     sockaddr_in clientsock;
     socklen_t clientSize = sizeof(clientsock);
     client = accept(listening, (sockaddr *)&client, &clientSize);
+}
+
+Server::Server(int kliens){
+    client = socket(AF_INET, SOCK_STREAM, 0);
+    if (client == -1)
+    {
+        cout << "socket error" << endl;
+        exit(1);
+    }
+    //	Create a hint structure for the server we're connecting with
+    string ipAddress = "127.0.0.1";
+
+    sockaddr_in hint;
+    hint.sin_family = AF_INET;
+    hint.sin_port = htons(54000);
+    inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr);
+
+    //	Connect to the server on the socket
+    int connectRes = connect(client, (sockaddr *)&hint, sizeof(hint));
+    if (connectRes == -1)
+    {
+        cout << "connect error" << endl;
+        exit(1);
+    }
 }
 
 Server::~Server()
@@ -50,6 +75,7 @@ Server::~Server()
 string Server::Recive()
 {
     int hossz = ReciveSize();
+    cout<<"read length"<<hossz<<endl;
     vector<char> buf(hossz);
     int res = recv(this->client, buf.data(), hossz, 0);
     if (!resCheck(res))
@@ -71,9 +97,20 @@ string Server::Recive()
         res += extra;
     }
     string csomag(buf.begin(), buf.end());
-    cout << csomag << endl;
+    //cout << csomag << endl;
     return csomag;
 }
+
+bool Server::Sending(string message)
+{
+    int res = send(client, message.c_str(), message.size(), 0);
+    if (!resCheck(res))
+    {
+        return false;
+    }
+    return true;
+}
+
 
 int Server::ReciveSize()
 {
@@ -101,7 +138,7 @@ int Server::ReciveSize()
     string csomag(buf.begin(), buf.end());
 
     hossz = dekoder.Decode255(csomag);
-    cout << "hossz: " << hossz << endl;
+    //cout << "hossz: " << hossz << endl;
 
     return hossz;
 }

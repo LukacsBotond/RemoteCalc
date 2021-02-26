@@ -17,7 +17,11 @@ private:
 public:
     Encode();
     ~Encode();
+    std::vector<std::any> parameters();
+    std::vector<std::any> parameters(std::any a);
+    std::vector<std::any> parameters(std::any a, std::any b);
     std::string encoding(std::string Fnev, std::vector<std::any> parameterek);
+    void testOut(std::string coded);
 };
 
 #endif
