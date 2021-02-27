@@ -75,7 +75,6 @@ Server::~Server()
 string Server::Recive()
 {
     int hossz = ReciveSize();
-    cout<<"read length"<<hossz<<endl;
     vector<char> buf(hossz);
     int res = recv(this->client, buf.data(), hossz, 0);
     if (!resCheck(res))

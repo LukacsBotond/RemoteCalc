@@ -13,7 +13,9 @@ int main()
     {
         vector<string> fuggveny;
         string message = szerver->Recive();
+        cout<<"recived"<<endl;
         fuggveny = func.getBoth(message);
+        cout<<"cut"<<endl;
         string ret = func.SolveFunc(fuggveny.at(0),fuggveny.at(1));
         cout<<"sending: "<<ret<<endl;
         szerver->Sending(ret);
@@ -23,7 +25,6 @@ int main()
         {
             cout << i << " " << ret[i] << " " << (int)ret[i] << endl;
         }
-        cout << func.getFuncName(message) << " " << func.getParameters(message) << endl;
 
     
     }

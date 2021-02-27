@@ -23,11 +23,11 @@ class Server{
         ~Server();
         std::string Recive();
         bool Sending(std::string message);
-        bool resCheck(int res);
     private:
         int client;
         int listening;
         int ReciveSize();
+        bool resCheck(int res);
         DeValues dekoder;
 
 };

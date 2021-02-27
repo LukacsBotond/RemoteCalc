@@ -44,4 +44,27 @@ public:
     std::string DecodeAll(std::string parameters);
 };
 
+class VectorAdd: public Solve
+{
+private:
+    /* data */
+public:
+    VectorAdd(){}
+    ~VectorAdd(){}
+    std::string DecodeAll(std::string parameters);
+};
+
+class VectScalar: public Solve
+{
+private:
+    /* data */
+public:
+    VectScalar(){}
+    ~VectScalar(){}
+    std::string DecodeAll(std::string parameters);
+};
+
+
+
+
 #endif

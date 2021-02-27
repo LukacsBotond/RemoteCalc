@@ -1,31 +1,23 @@
 #include <any>
 #include <iostream>
 #include <vector>
-#include "../common/EnValues.h"
-#include "Encode.h"
-#include "../common/Server.h"
+#include "KregFunction.h"
 
 using namespace std;
 
-Server kliens(1);
-Encode kodolo;
-
-int add(int a, int b)
-{
-    string test = kodolo.encoding(__FUNCTION__, kodolo.parameters(a, b));
-    
-    //kodolo.testOut(test);
-
-    kliens.Sending(test);
-
-    cout<<kliens.Recive()<<endl;
-    return 1;
-}
 
 int main()
 {
+    int testip1[] = {1, 2, 563};
+    float testfp1[] = {1.2, 2.5, 3.12};
 
-    add(3, 5);
+    //add(3, 5);
+    cout<<"vectAdd: "<<vectorAdd(testip1,3)<<endl;
+    float* retf = vectScalar(testfp1,3,2);
+    for(int i=0;i<3;i++){
+        cout<<retf[i]<<endl;
+    }
+    cout<<endl;
     /*
     vector<any> barmi;
     //barmi.push_back(5);
@@ -56,8 +48,7 @@ int main()
     cout<<"int tomb: "<< testip.type().name()<<endl;
     cout<<"float tomb: "<< testfp.type().name()<<endl;
     cout<<"double tomb: "<< testdp.type().name()<<endl;
-    */
-/*
+    
     int testip1[] = {1, 2, 563};
     float testfp1[] = {1, 2, 3};
     double testdp1[] = {1, 2, 3};
